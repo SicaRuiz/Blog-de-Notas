@@ -22,12 +22,12 @@ function agregarNotas(){
     let contenido = document.getElementById('contenidoModal1');
     let modificacion = document.getElementById('modificacionModal1');
     if(titulo.value != "" && contenido.value != ""){
-        notas.push(new Contacto(titulo.value, contenido.value, modificacion.value, notas.length));
+        notas.push(new Nota(titulo.value, contenido.value, notas.length));
         localStorage.setItem('notas',JSON.stringify(notas));
 
         titulo.value = ""
         contenido.value = ""
-        modificacion.value = ""
+       
 
         listarNotas();
         Swal.fire({

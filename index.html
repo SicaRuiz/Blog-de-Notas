@@ -8,43 +8,86 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 
 <body background="">
+
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-            <a class="navbar-brand" href="#">Navbar</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
+            <a class="navbar-brand" href="#">Bloc de Notas</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
+                aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
             </button>
 
             <div class="collapse navbar-collapse" id="navbarColor02">
-                <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav ml-md-auto ">
                     <li class="nav-item active">
-                        <a class="nav-link my-3 active" href="#">Home <span class="sr-only"></span></a>
+                        <a class="nav-link  active" style="font-size: 18px;" href="#">Home <span
+                                class="sr-only"></span></a>
                     </li>
                     <li class="nav-item">
-                        <button type="button" class="nav-link mt-2 pt-3 btn btn-link">Agregar Bloc de notas</button>     
+                        <a type="button" class="nav-link ml-2 mr-5" style="font-size: 18px;">Agregar Bloc de notas</a>
                     </li>
+                    <form class="form-inline my-2 my-lg-0 mr-5">
+                        <button class="btn btn-warning my-2 my-sm-0" data-toggle="collapse" href="#multiCollapseExample1" role="button"
+                            aria-expanded="false" aria-controls="multiCollapseExample1" style="font-size: 13px;">Filtrar categoria</button>
+                    </form>
                 </ul>
                 <form class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="text" placeholder="Buscar">
-                    <button class="btn btn-success my-2 my-sm-0" type="submit">Buscar</button>
+                    <button class="btn btn-success my-2 my-sm-0" style="font-size: 13px;" type="submit">Buscar</button>
                 </form>
             </div>
         </nav>
     </header>
+        <div class="container">
+            <div class="row">
+                <div class="col">
+                    <div class="collapse multi-collapse" id="multiCollapseExample1">
+                        <legend>Filtros de Notas</legend>
+                        <div class="form-group">
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio1" name="customRadio" class="custom-control-input"
+                                    checked="">
+                                <label class="custom-control-label" for="customRadio1">Toggle this custom radio</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio2" name="customRadio" class="custom-control-input">
+                                <label class="custom-control-label" for="customRadio2">Or toggle this other custom
+                                    radio</label>
+                            </div>
+                            <div class="custom-control custom-radio">
+                                <input type="radio" id="customRadio3" name="customRadio" class="custom-control-input"
+                                    disabled="">
+                                <label class="custom-control-label" for="customRadio3">Disabled custom radio</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch1" checked="">
+                                <label class="custom-control-label" for="customSwitch1">Toggle this switch
+                                    element</label>
+                            </div>
+                            <div class="custom-control custom-switch">
+                                <input type="checkbox" class="custom-control-input" disabled="" id="customSwitch2">
+                                <label class="custom-control-label" for="customSwitch2">Disabled switch element</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     <main>
         <h1 class="text-center mt-5">Mis Notas</h1>
         <div class="card text-center my-5 mx-3" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Special title treatment</h5>
-              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
             </div>
-          </div>
-
+        </div>
     </main>
     <footer>
 
@@ -59,6 +102,6 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
-        <script src="js/script.js"></script>
+    <script src="js/script.js"></script>
 
 </html>
