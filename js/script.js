@@ -52,13 +52,13 @@ function listarNotas(notas = null) {
     if(!notas)
         notas = JSON.parse(localStorage.getItem('notas'));
     
-    let tabla = "";
+    let bloques = "";
     if(!notas || notas.length<1) {
-        tabla += '<tr><td colspan="2">Agregue un contacto para empezar</td><td colspan="2"></td><td><button type="button" class="btn mr-3 btn-outline-primary" data-toggle="modal" data-target="#addContactModal"><i class="fas fa-user-plus mr-3"></i>Agregar Contacto</button></td></tr>';
+        bloques += '<tr><td colspan="2">Agregue una nota para empezar</td><td colspan="2"></td><td><button type="button" class="btn mr-3 btn-outline-primary" data-toggle="modal" data-target="#addContactModal"><i class="fas fa-user-plus mr-3"></i>Agregar Contacto</button></td></tr>';
     }
     else {
         for (let i = 0; i < notas.length; i++)
             tabla += '<tr><td colspan="2">'+ notas[i].nombre + '</td><td colspan="2">' + notas[i].telefono + '</td><td><button type="button" class="btn btn-outline-warning mr-3" data-toggle="modal" data-target="#editContactModal" onclick="actualizarContacto(' + notas[i].id + ')"> <i class="fas fa-user-edit mr-3"></i>Editar</button><button class="btn btn-outline-danger" onclick="eliminarContacto(' + notas[i].id + ')"><i class="fas fa-trash-alt mr-3"></i>Eliminar</button></td></tr>';
     }
-    document.getElementById('tablaContactos').innerHTML = tabla;
+    document.getElementById('tablaNotas').innerHTML = tabla;
 }
