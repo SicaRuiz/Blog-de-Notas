@@ -1,23 +1,242 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Bloc de notas</title>
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="./fontawesome-free-5.12.0-web/css/all.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="./css/styles.css">
 </head>
+
 <body>
-    <header>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top"
+        style="background-image:url(2.png); background-position: center; background-size: 100% auto; background-repeat: no-repeat;">
+        <a class="navbar-brand animated swing" href=""><i class="fas fa-book-open fa-2x"></i></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
 
-
-
-    </header>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-md-auto ">
+                <li class="nav-item active">
+                    <a class="nav-link active mr-3 animated flipInX" style="font-size: 18px;" href="index.html"><i
+                            class="fas fa-home mr-2"></i>Home<span class="sr-only"></span></a>
+                </li>
+            </ul>
+            <button class="btn btn-success mr-3 my-2 my-md-0 animated bounceIn" style="font-size: 12px;" type="button"
+                data-toggle="modal" data-target="#addNotaModal"><i class="fas fa-plus-square mr-2"></i>Agregar
+                Nota</button>
+            <button class="btn btn-warning mr-3 my-2 my-md-0 animated bounceIn" style="font-size: 12px;" type="button"
+                data-toggle="modal" data-target="#addCategoriaModal"><i class="fas fa-plus-square mr-2"></i>Agregar
+                Categoria</button>
+            <form class="form-inline my-2 my-lg-0" onsubmit="buscar()">
+                <input class="form-control mr-sm-2 animated flipInX" type="text" placeholder="Buscar" id="Buscar">
+                <button class="btn btn-success my-2 mx-1 my-sm-0 animated bounceIn" style="font-size: 13px;"
+                    type="button" onclick="buscar()"><i class="fas fa-search px-4"></i></button>
+                <button class="btn btn-danger my-2 my-sm-0 ml-2 animated bounceIn" style="font-size: 13px;"
+                    type="button" onclick="cancelar()"><i class="fas fa-times"></i></button>
+            </form>
+        </div>
+    </nav>
+    <!-- Body-->
     <main>
-        
-    </main>
-    <footer>
+        <div class="container rounded-pill mt-4 border border-primary"
+            style=" width: 290px; background-image:url(2.png); background-position: center; background-size: 100% auto; background-repeat: no-repeat;">
+            <h1 class="text-center text-white text-mt-5 py-3"><i
+                    class="far fa-snowflake text-white mr-4 animated infinite rotateIn"></i>Mis
+                Notas<i class="far fa-snowflake text-white ml-4 animated infinite rotateIn"></i></h1>
+        </div>
+        <div class="d-flex flex-row-reverse bd-highlight mt-4 mr-4">
+            <p>
+                <button class="btn btn-warning animated lightSpeedIn" onclick="listarCategorias()" type="button"
+                    data-toggle="collapse" data-target="#collapseExample" aria-expanded="false"
+                    aria-controls="collapseExample">Filtrar
+                    Categoria</button>
+            </p>
+            <div class="collapse rounded  bd-highlight animated flipInY " id="collapseExample"
+                style="background-image: url(filtro.jpg);  background-size: cover; background-repeat: no-repeat;">
+                <div class="card card-body border-0 " style="background-color: transparent;">
+                    <fieldset class="form-group" id="listDeCategorias">
+                    </fieldset>
+                    <form>
+                        <div class=" form-group mt-1" style="background-color: transparent;" id="seccionOrdenamiento">
 
-    </footer>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     
-</body>
+
+        <div class="row row-cols-1 row-cols-md-3 mx-5 my-3 mb-5 pb-5" id="blocDeNotas">
+        </div>
+    </main>
+
+    <!-- Modal Agregar Notas */ -->
+    <div class="modal fade" id="addNotaModal" tabindex="-1" role="dialog" aria-labelledby="addNotaModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog animated pulse" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addNotaModalLabel">Agregar Nota</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <form class="col-10">
+                                <div class="form-group">
+                                    <label for="categoria"><i class="fas fa-file-alt mr-2"></i>Categoria</label>
+                                    <div class="input-group">
+                                        <select class="custom-select mb-2" id="categoriaModal1">
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="titulo"><i class="fas fa-file-alt mr-2"></i>TITULO</label>
+                                    <input type="text" class="form-control" name="titulo" id="tituloModal1"
+                                        maxlength="60" minlength="1">
+                                    <small class="text-muted">Longitud máxima: 60 caracteres</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="contenido"><i class="fas fa-keyboard mr-2"></i>CONTENIDO</label>
+                                    <textarea type="text" class="form-control" name="contenido" id="contenidoModal1"
+                                        maxlength="500" minlength="1"></textarea>
+                                    <small class="text-muted">Longitud máxima: 500 caracteres</small>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="agregarNota()"><i
+                            class="fas fa-plus-circle mr-2"></i>Agregar Nota</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i
+                            class="fas fa-times mr-2"></i>Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Agregar Categoria */ -->
+    <div class="modal fade" id="addCategoriaModal" tabindex="-1" role="dialog" aria-labelledby="addCategoriaModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog animated bounceInDown" role="document" >
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addCategoriaModalLabel">Agregar Categoria</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <form class="col-10">
+                                <div class="form-group">
+                                    <label for="nombreCategoria"><i class="fas fa-file-alt mr-2"></i>Categoria</label>
+                                    <input type="text" class="form-control" name="nombreCategoria" id="nombreCategoria"
+                                        maxlength="60" minlength="1">
+                                    <small class="text-muted">Longitud máxima: 60 caracteres</small>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="agregarCategoria()"><i
+                            class="fas fa-plus-circle mr-2"></i>Agregar Categoria</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i
+                            class="fas fa-times mr-2"></i>Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Editar Notas-->
+    <div class="modal fade" id="editNotaModal" tabindex="-1" role="dialog" aria-labelledby="editNotaModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog animated bounceInUp" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editNotaModalLabel">Modificar Nota</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            <form class="col-10">
+                                <div class="form-group">
+                                    <label for="categoria"><i class="fas fa-file-alt mr-2"></i>Categoria</label>
+                                    <div class="input-group">
+                                        <select class="custom-select mb-2" id="categoriaModal">
+                                        </select>
+                                    </div>
+                                    <small class="text-muted">Seleccion obligatoria </small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="titulo"><i class="fas fa-file-alt mr-2"></i></i>TITULO</label>
+                                    <input type="text" class="form-control" name="titulo" id="tituloModal"
+                                        maxlength="60" minlength="1">
+                                    <small class="text-muted">Longitud máxima: 60 caracteres</small>
+
+                                </div>
+                                <div class="form-group">
+                                    <label for="contenido"><i class="fas fa-keyboard mr-2"></i>CONTENIDO</label>
+                                    <textarea type="text" class="form-control" name="contenido" id="contenidoModal"
+                                        maxlength="500" minlength="1"></textarea>
+                                    <small class="text-muted">Longitud máxima: 500 caracteres</small>
+
+                                </div>
+                                <input type="text" id="idModal" hidden>
+                                <!-- type cambiado a "text" para poder utilizar el id alfanumérico-->
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" onclick="editarNota()"><i
+                            class="far fa-edit mr-2"></i>Actualizar Nota</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i
+                            class="fas fa-times mr-2"></i>Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class=" text-white text-center py-3 mt-5"
+        style="background-image:url(2.png); background-position:  bottom; background-size: 100% auto; background-repeat: no-repeat;">
+        Julio Cesar Ruiz Perez De Nucci - 2020 &copy Todos los derechos reservados</footer>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous"></script>
+    <script src="./js/moment.min.js"></script>
+    <script src="js/script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="js/snowstorm-min.js"></script>
+    <script src="js/wow.min.js"></script>
+              <script>
+              new WOW().init();
+              </script>
+    </body>
 </html>
